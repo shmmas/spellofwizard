@@ -1,0 +1,4 @@
+repository "spellofwizard 2025-01-20_19-50-59/spellofwizard@1375763182861@cloud"
+  path "/"
+    br "/main"
+    co "/main"
