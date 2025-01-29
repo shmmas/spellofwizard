@@ -59,4 +59,13 @@ public class FireExtinguisher : MonoBehaviour
             }
         }
     }
+
+    void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("Fire"))
+        {
+            Destroy(other); // Hancurkan api atau tambahkan efek memadamkan
+        }
+    }
+
 }
