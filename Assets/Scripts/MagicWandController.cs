@@ -16,6 +16,12 @@ public class MagicWandController : MonoBehaviour
     void Update()
     {
         DetectGestureAndCastSpell();
+
+            if (Input.GetKeyDown(KeyCode.Space)) // Debug spawn spell
+    {
+        CastWaterSpell();
+    }
+
     }
 
     private void DetectGestureAndCastSpell()
@@ -48,18 +54,25 @@ public class MagicWandController : MonoBehaviour
     private Vector3 InputTrackingHand()
     {
         // Simulasikan tangan dengan XR Device Simulator (gunakan transform tangan kanan)
-        Transform rightHand = GameObject.Find("RightHand Controller").transform;
+        Transform rightHand = GameObject.Find("Right Controller Stabilized").transform;
         return rightHand != null ? rightHand.position : Vector3.zero;
     }
 
     private void CastWaterSpell()
     {
+        
         // Spawn spell air
+         Debug.Log("CastWaterSpell() dipanggil!"); // Tambahkan ini
         GameObject waterSpell = Instantiate(waterSpellPrefab, spellSpawnPoint.position, spellSpawnPoint.rotation);
         Rigidbody rb = waterSpell.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.velocity = spellSpawnPoint.forward * spellSpeed;
+            rb.velocity = transform.forward * spellSpeed;
+             Debug.Log("Velocity: " + rb.velocity); // Debugging
+        }
+           else
+        {
+            Debug.LogError("Rigidbody tidak ditemukan di waterSpellPrefab!");
         }
 
         // Hancurkan api jika terkena spell
