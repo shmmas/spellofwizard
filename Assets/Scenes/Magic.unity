@@ -691,7 +691,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7f4b77a11ac03468f266f98852f21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterSpellPrefab: {fileID: 690935206134690169, guid: 5380ec6371d7d82488b2f227f3e25d46, type: 3}
+  waterSpellPrefab: {fileID: 1081194678152057051, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
   spellSpawnPoint: {fileID: 1487528650}
   spellSpeed: 10
   fireObject: {fileID: 4006578021646135857, guid: ed2e9650511847f479cd98183d1112ea, type: 3}
@@ -944,7 +944,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.4813871, y: -0.5079712, z: 0.38243204, w: -0.6033054}
   m_LocalPosition: {x: -0.002, y: 4.793, z: 0.203}
-  m_LocalScale: {x: 0.04370875, y: 0.04370875, z: 0.043708753}
+  m_LocalScale: {x: 0.09236582, y: 0.09236582, z: 0.09236584}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 654657727}

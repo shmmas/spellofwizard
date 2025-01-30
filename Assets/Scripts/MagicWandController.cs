@@ -54,7 +54,7 @@ public class MagicWandController : MonoBehaviour
     private Vector3 InputTrackingHand()
     {
         // Simulasikan tangan dengan XR Device Simulator (gunakan transform tangan kanan)
-        Transform rightHand = GameObject.Find("Right Controller Stabilized").transform;
+        Transform rightHand = GameObject.Find("Right Controller").transform;
         return rightHand != null ? rightHand.position : Vector3.zero;
     }
 
@@ -67,8 +67,8 @@ public class MagicWandController : MonoBehaviour
         Rigidbody rb = waterSpell.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.velocity = transform.forward * spellSpeed;
-             Debug.Log("Velocity: " + rb.velocity); // Debugging
+            rb.velocity = spellSpawnPoint.forward * spellSpeed;
+            Debug.Log("Velocity: " + rb.velocity); // Debugging
         }
            else
         {
