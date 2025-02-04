@@ -536,6 +536,18 @@ PrefabInstance:
       value: waterball
       objectReference: {fileID: 0}
     - target: {fileID: 1243492083339285227, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.13541487
+      objectReference: {fileID: 0}
+    - target: {fileID: 1243492083339285227, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.13541487
+      objectReference: {fileID: 0}
+    - target: {fileID: 1243492083339285227, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.13541487
+      objectReference: {fileID: 0}
+    - target: {fileID: 1243492083339285227, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.68
       objectReference: {fileID: 0}
@@ -545,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1243492083339285227, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.58
+      value: 0.804
       objectReference: {fileID: 0}
     - target: {fileID: 1243492083339285227, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -573,6 +585,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1243492083339285227, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2491402351753358524, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
+      propertyPath: ShapeModule.enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

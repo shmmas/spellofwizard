@@ -1,49 +1,66 @@
-using System.Collections;
 using UnityEngine;
 
 public class MagicWandController : MonoBehaviour
 {
     public GameObject waterSpellPrefab; // Prefab untuk spell air
-    public Transform spellSpawnPoint; // Posisi di mana spell muncul
-    public float spellSpeed = 10f; // Kecepatan spell air
+    public Transform spellSpawnPoint; // Posisi spell muncul
+    public float spellSpeed = 10f; // Kecepatan spell
 
     public GameObject fireObject; // Objek api untuk dimatikan
+    public Transform rightHandTransform; // Transform tangan kanan dari XR Device Simulator
 
-    private Vector3 previousHandPosition; // Posisi tangan sebelumnya
-    private float gestureThreshold = 1f; // Ambang gerakan gesture
-    private float gestureCircleProgress = 0f; // Kemajuan gesture lingkaran
+    private Vector3 previousHandPosition = Vector3.zero;
+    private float gestureThreshold = 0.1f;
+    private float gestureCircleProgress = 0f;
+    private float totalAngle = 0f;
+    private Vector3 gestureStartDirection;
 
     void Update()
     {
-        DetectGestureAndCastSpell();
+        if (rightHandTransform != null)
+        {
+            DetectGestureAndCastSpell();
+        }
+        else
+        {
+            Debug.LogError("RightHandTransform belum di-assign!");
+        }
 
-            if (Input.GetKeyDown(KeyCode.Space)) // Debug spawn spell
-    {
-        CastWaterSpell();
-    }
-
+        if (Input.GetKeyDown(KeyCode.Space)) // Debug dengan tombol Space
+        {
+            CastWaterSpell();
+        }
     }
 
     private void DetectGestureAndCastSpell()
     {
-        // Ambil posisi tangan (gunakan XR Device Simulator input di sini)
-        Vector3 currentHandPosition = InputTrackingHand();
+        Vector3 currentHandPosition = rightHandTransform.position;
 
         if (previousHandPosition != Vector3.zero)
         {
-            // Hitung perubahan posisi tangan
-            Vector3 delta = currentHandPosition - previousHandPosition;
+            Vector3 movement = currentHandPosition - previousHandPosition;
+            float distanceMoved = movement.magnitude;
 
-            // Deteksi gerakan melingkar (contoh: lingkaran horizontal)
-            if (Mathf.Abs(delta.x) > gestureThreshold || Mathf.Abs(delta.y) > gestureThreshold)
+            if (distanceMoved > gestureThreshold)
             {
-                gestureCircleProgress += delta.magnitude;
+                Vector3 movementDirection = movement.normalized;
+                if (gestureCircleProgress == 0)
+                {
+                    gestureStartDirection = movementDirection;
+                }
 
-                // Jika progress gesture melingkar cukup besar, keluarkan spell
-                if (gestureCircleProgress >= 5f)
+                float angle = Vector3.SignedAngle(gestureStartDirection, movementDirection, Vector3.forward);
+                totalAngle += Mathf.Abs(angle);
+                gestureCircleProgress += distanceMoved;
+
+                Debug.Log($"Angle: {angle}, Total Angle: {totalAngle}");
+
+                if (totalAngle >= 360f && gestureCircleProgress >= 2f)
                 {
                     CastWaterSpell();
-                    gestureCircleProgress = 0f; // Reset gesture progress
+                    gestureCircleProgress = 0f;
+                    totalAngle = 0f;
+                    Debug.Log("Gesture lingkaran berhasil! Spell ditembakkan!");
                 }
             }
         }
@@ -51,44 +68,34 @@ public class MagicWandController : MonoBehaviour
         previousHandPosition = currentHandPosition;
     }
 
-    private Vector3 InputTrackingHand()
-    {
-        // Simulasikan tangan dengan XR Device Simulator (gunakan transform tangan kanan)
-        Transform rightHand = GameObject.Find("Right Controller").transform;
-        return rightHand != null ? rightHand.position : Vector3.zero;
-    }
-
     private void CastWaterSpell()
     {
-        
-        // Spawn spell air
-         Debug.Log("CastWaterSpell() dipanggil!"); // Tambahkan ini
+        Debug.Log("CastWaterSpell() dipanggil!");
         GameObject waterSpell = Instantiate(waterSpellPrefab, spellSpawnPoint.position, spellSpawnPoint.rotation);
         Rigidbody rb = waterSpell.GetComponent<Rigidbody>();
+
         if (rb != null)
         {
             rb.velocity = spellSpawnPoint.forward * spellSpeed;
-            Debug.Log("Velocity: " + rb.velocity); // Debugging
+            Debug.Log("Velocity: " + rb.velocity);
         }
-           else
+        else
         {
             Debug.LogError("Rigidbody tidak ditemukan di waterSpellPrefab!");
         }
 
-        // Hancurkan api jika terkena spell
         CheckFireHit(waterSpell);
     }
 
     private void CheckFireHit(GameObject spell)
     {
-        // Deteksi jika spell mengenai api
         Collider spellCollider = spell.GetComponent<Collider>();
         if (spellCollider != null && fireObject != null)
         {
             Collider fireCollider = fireObject.GetComponent<Collider>();
             if (fireCollider.bounds.Intersects(spellCollider.bounds))
             {
-                Destroy(fireObject); // Matikan api
+                Destroy(fireObject);
                 Debug.Log("Api berhasil dipadamkan!");
             }
         }

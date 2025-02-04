@@ -5,14 +5,16 @@ public class GestureDetector : MonoBehaviour
 {
     public Transform staffTip; // Titik ujung tongkat
     public float gestureTime = 1.5f; // Durasi maksimum untuk mendeteksi gesture
-    public float gestureThreshold = 0.1f; // Toleransi gerakan untuk mendeteksi perubahan
+    public float gestureThreshold = 0.2f; // Lebih longgar untuk variasi gerakan
+    public float minRadius = 0.03f; // Radius minimum agar lingkaran kecil bisa dikenali
+    public int minPoints = 10; // Jumlah titik minimum untuk deteksi gesture
 
     private List<Vector3> gesturePoints = new List<Vector3>();
     private float gestureTimer = 0f;
 
     void Update()
     {
-        // Rekam posisi tongkat
+        // Rekam posisi tongkat selama gestureTime detik
         if (gestureTimer < gestureTime)
         {
             gesturePoints.Add(staffTip.position);
@@ -29,38 +31,65 @@ public class GestureDetector : MonoBehaviour
 
     private void RecognizeGesture()
     {
-        // Contoh deteksi gerakan lingkaran
         if (IsCircle(gesturePoints))
         {
-            Debug.Log("Gesture Detected: Circle");
-            CastSpell("Fireball"); // Cast spell
+            Debug.Log("✅ Gesture Detected: Circle");
+            CastSpell("Fireball");
+        }
+        else
+        {
+            Debug.Log("❌ Gesture Not Recognized");
         }
     }
 
     private bool IsCircle(List<Vector3> points)
     {
-        if (points.Count < 10) return false;
+        if (points.Count < minPoints) 
+        {
+            Debug.Log("❌ Gagal: Tidak cukup titik");
+            return false;
+        }
 
-        // Hitung radius rata-rata
         Vector3 center = GetCenter(points);
-        float avgRadius = 0f;
-        foreach (var point in points)
-        {
-            avgRadius += Vector3.Distance(point, center);
-        }
-        avgRadius /= points.Count;
+        float totalRadius = 0f;
+        float deviation = 0f;
 
-        // Toleransi untuk bentuk lingkaran
         foreach (var point in points)
         {
-            if (Mathf.Abs(Vector3.Distance(point, center) - avgRadius) > gestureThreshold)
-                return false;
+            float radius = Vector3.Distance(point, center);
+            totalRadius += radius;
         }
+
+        float avgRadius = totalRadius / points.Count;
+
+        foreach (var point in points)
+        {
+            deviation += Mathf.Abs(Vector3.Distance(point, center) - avgRadius);
+        }
+
+        float deviationThreshold = avgRadius * 0.3f; // Lebih longgar
+
+        Debug.Log($"🔍 Checking Gesture: Points={points.Count}, AvgRadius={avgRadius}, Deviation={deviation}, Threshold={deviationThreshold}");
+
+        if (avgRadius < minRadius) 
+        {
+            Debug.Log("❌ Gagal: Radius terlalu kecil");
+            return false;
+        }
+
+        if (deviation > deviationThreshold)
+        {
+            Debug.Log("❌ Gagal: Deviasi terlalu besar");
+            return false;
+        }
+
         return true;
     }
 
     private Vector3 GetCenter(List<Vector3> points)
     {
+        if (points.Count == 0) return Vector3.zero;
+
         Vector3 center = Vector3.zero;
         foreach (var point in points)
         {
@@ -71,7 +100,6 @@ public class GestureDetector : MonoBehaviour
 
     private void CastSpell(string spellName)
     {
-        // Panggil logika spell casting di sini
-        Debug.Log($"Casting spell: {spellName}");
+        Debug.Log($"🔥 Casting spell: {spellName}");
     }
 }
