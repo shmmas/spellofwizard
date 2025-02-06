@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 5474631402817954431}
   - component: {fileID: 3395181682039713640}
   - component: {fileID: 6700718330556432491}
-  - component: {fileID: 566328375787009940}
-  - component: {fileID: 8075006181343918503}
   m_Layer: 3
   m_Name: fireObject
   m_TagString: Untagged
@@ -28,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006578021646135857}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7120481, y: -0, z: -0, w: 0.70213073}
+  m_LocalRotation: {x: -0.71204436, y: 0, z: 0, w: 0.70213443}
   m_LocalPosition: {x: 0.026000023, y: 0.76, z: -0.01}
   m_LocalScale: {x: 0.32825, y: 0.32825, z: 0.32825}
   m_ConstrainProportionsScale: 0
@@ -4833,45 +4831,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &566328375787009940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006578021646135857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8cc670a92f3af3428a44521e76b62d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireIntensity: 10
-  extinguishThreshold: 0
-  fireParticles: {fileID: 3395181682039713640}
-  fireLight: {fileID: 7136437484146475603}
---- !u!136 &8075006181343918503
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006578021646135857}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.265939
-  m_Height: 6.531878
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.0000000015785012, z: 1.2659377}
 --- !u!1 &5848195201621218731
 GameObject:
   m_ObjectHideFlags: 0

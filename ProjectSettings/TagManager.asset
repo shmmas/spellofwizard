@@ -9,6 +9,8 @@ TagManager:
   - CrystalQuartz
   - ToxicSlime
   - Potion
+  - Undefined
+  - Fire
   layers:
   - Default
   - TransparentFX
