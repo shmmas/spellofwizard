@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Item
+  - MagicOrb
+  - LeafOfLife
+  - CrystalQuartz
+  - ToxicSlime
+  - Potion
   layers:
   - Default
   - TransparentFX
