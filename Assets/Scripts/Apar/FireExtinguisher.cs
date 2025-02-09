@@ -30,7 +30,7 @@ public class FireExtinguisher : MonoBehaviour
     }
 
     void StartExtinguishing()
-    {
+    {   
         isExtinguishing = true;
         if (extinguisherParticles != null)
         {
