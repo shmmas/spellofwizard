@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
+    path: Assets/Scenes/MainMenu.unity
+    guid: e8bbb254b5f16e949b92bb3603d25489
+  - enabled: 1
     path: Assets/Scenes/spellofcolosseum.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: b502f5f3ed8c2e44b89afec8396f4efd
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 7f983868cc5a7574981b7cd564c0f49a, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e3fbe88baf07c5045a1f9553c00b8372, type: 2}

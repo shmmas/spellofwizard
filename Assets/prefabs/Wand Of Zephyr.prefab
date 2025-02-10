@@ -241,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterballPrefab: {fileID: 1081194678152057051, guid: ab2c0d6d526429145a860c2da341cdf8, type: 3}
   shootPoint: {fileID: 1354490621466016897}
-  shootForce: 10
+  shootForce: 15
   fireLayer:
     serializedVersion: 2
     m_Bits: 8
