@@ -11,6 +11,8 @@ TagManager:
   - Potion
   - Undefined
   - Fire
+  - Grabbale
+  - InventorySlot
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Fire
   - Water
   - UI
-  - 
+  - Grabbale
   - 
   - 
   - 

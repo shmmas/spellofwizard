@@ -13,7 +13,8 @@ public class PlayerInventory : MonoBehaviour
             if (storedItems.Count <= i || storedItems[i] == null)
             {
                 storedItems.Insert(i, item);
-                item.SetActive(false); // Sembunyikan item dari dunia
+                item.transform.parent = transform; // Simpan item sebagai anak dari inventory
+                item.SetActive(false); // Sembunyikan dari dunia
                 Debug.Log("Item stored in slot: " + i);
                 return;
             }
@@ -22,19 +23,16 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public void RetrieveItem(int slotIndex)
+{
+    if (slotIndex < storedItems.Count && storedItems[slotIndex] != null)
     {
-        if (slotIndex < storedItems.Count && storedItems[slotIndex] != null)
-        {
-            GameObject item = storedItems[slotIndex];
-            item.SetActive(true); // Munculkan kembali
-            item.transform.position = transform.position + transform.forward * 0.5f; // Spawn di depan player
-            storedItems[slotIndex] = null; // Kosongkan slot
-            Debug.Log("Item retrieved from slot: " + slotIndex);
-        }
+        GameObject item = storedItems[slotIndex];
+        item.SetActive(true); // Munculkan kembali
+        item.transform.parent = null; // Lepaskan dari inventory
+        item.transform.position = transform.position + transform.forward * 0.5f; // Spawn di depan player
+        storedItems[slotIndex] = null; // Kosongkan slot
+        Debug.Log("Item retrieved from slot: " + slotIndex);
     }
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject); // Pastikan inventory tetap ada
-    }
+}
 
 }

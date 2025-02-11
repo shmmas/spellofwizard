@@ -229,6 +229,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Keyboard T",
+                    "type": "Button",
+                    "id": "01e46afe-e14d-4dc7-b5c5-4e3d80cdbc63",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToogleInventory",
+                    "type": "Button",
+                    "id": "4ffa6f02-5a3b-473f-b0da-1db66c2f8660",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -509,6 +527,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d539f7e8-5b79-4039-bbf1-1ac222a5134f",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Keyboard T",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5dacc4c7-2e70-4500-8c72-99595c72b49e",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
@@ -570,6 +599,95 @@
                     "processors": "",
                     "groups": "",
                     "action": "Hand-Controller Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d528944-2ceb-49f4-8d33-216571174f6e",
+                    "path": "<Keyboard>/capsLock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToogleInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a88edf6-99f9-4c9c-998f-38b20600b489",
+                    "path": "<XRController>{LeftHand}/{PrimaryTrigger}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToogleInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "New action map",
+            "id": "7f8008fd-2329-42c7-8abf-9a5990ca0b1e",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "9a13dce3-9f7a-4293-8c42-63d0b838511d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dbb79bd0-8841-45c2-9424-9ea5d9ffb31a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "ToogleInventory",
+            "id": "a77beb5d-f0cb-431e-afa7-084b07f3a542",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "77140f16-5b24-49a0-a930-c8b58aa9fa97",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d0fe44c5-37c5-4e4d-9cf2-26035c653d06",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "378d6467-0003-46ab-acc7-7cec1f72a681",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
