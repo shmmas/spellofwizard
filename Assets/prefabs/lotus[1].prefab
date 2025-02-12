@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: lotus[1]
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d7426cbfa11ce6d4086161cb5a3c04b2, type: 3}
+      propertyPath: m_TagString
+      value: SmellingFlower
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77,9 +81,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7426cbfa11ce6d4086161cb5a3c04b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1107148693205161509}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7426cbfa11ce6d4086161cb5a3c04b2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -4347701867151382197}
   m_SourcePrefab: {fileID: 100100000, guid: d7426cbfa11ce6d4086161cb5a3c04b2, type: 3}
 --- !u!1 &6680895683938134194 stripped
 GameObject:
@@ -288,15 +289,3 @@ CapsuleCollider:
   m_Height: 8.858673
   m_Direction: 1
   m_Center: {x: -0.007013046, y: 1.9901356, z: -0.14404996}
---- !u!114 &-4347701867151382197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6680895683938134194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4619a36a549f3eb4eb9fd3c04e1ecb5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

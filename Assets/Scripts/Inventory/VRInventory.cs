@@ -1,25 +1,45 @@
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class VRInventory : MonoBehaviour
 {
     public Transform[] inventorySlots; // 4 slot inventory
-    public XRController controller; // Controller untuk mengaktifkan/nonaktifkan inventory
+    public XRBaseController controller; // Controller untuk mengaktifkan/nonaktifkan inventory
     public XRBaseInteractor interactor; // Interactor untuk mengambil item
     public AudioClip grabSound, storeSound, dropSound; // Suara feedback
 
     private bool isInventoryActive = false;
+    private InputDevice inputDevice; // Input device untuk controller
+
+    void Start()
+    {
+        // Pastikan controller diassign
+        if (controller == null)
+        {
+            Debug.LogError("Controller tidak diassign! Pastikan controller diatur di Inspector.");
+        }
+        else
+        {
+            // Dapatkan input device dari controller
+            inputDevice = controller.GetComponent<XRController>().inputDevice;
+            if (!inputDevice.isValid)
+            {
+                Debug.LogError("Input device tidak valid! Pastikan controller terhubung.");
+            }
+        }
+    }
 
     void Update()
     {
         // Toggle inventory dengan tombol trigger
-        if (controller.inputDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out bool triggerPressed) && triggerPressed)
+        if (inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerPressed) && triggerPressed)
         {
             ToggleInventory();
         }
 
         // Drop item dengan tombol grip
-        if (controller.inputDevice.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out bool gripPressed) && gripPressed)
+        if (inputDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripPressed) && gripPressed)
         {
             DropItem(0); // Drop item dari slot pertama
         }

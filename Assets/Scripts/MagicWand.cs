@@ -8,6 +8,10 @@ public class MagicWand : MonoBehaviour
     public float shootForce = 15f;
     public LayerMask fireLayer;
 
+    [Header("Audio Settings")]
+    public AudioSource audioSource;  // Komponen AudioSource
+    public AudioClip fireSound;  // Suara saat menembak
+
     private XRGrabInteractable grabInteractable;
     private bool isHeld = false;
 
@@ -20,6 +24,12 @@ public class MagicWand : MonoBehaviour
             grabInteractable.selectEntered.AddListener(OnGrab);
             grabInteractable.selectExited.AddListener(OnRelease);
             grabInteractable.activated.AddListener(FireWaterball);
+        }
+
+        // Pastikan AudioSource ada di objek ini
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
@@ -37,11 +47,19 @@ public class MagicWand : MonoBehaviour
     {
         if (!isHeld) return;
 
+        // Instansiasi Waterball
         GameObject waterball = Instantiate(waterballPrefab, shootPoint.position, shootPoint.rotation);
         Rigidbody rb = waterball.GetComponent<Rigidbody>();
 
         rb.velocity = shootPoint.forward * shootForce;
 
+        // Memainkan suara spell jika ada
+        if (fireSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(fireSound);
+        }
+
+        // Debug untuk melihat arah tembakan
         Debug.DrawRay(shootPoint.position, shootPoint.forward * 5, Color.blue, 2f);
     }
 }
