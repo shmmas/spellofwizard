@@ -247,6 +247,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PrimaryButton",
+                    "type": "Button",
+                    "id": "c3398c58-ae4d-4fcd-9f13-976aa2db6445",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -623,71 +632,26 @@
                     "action": "ToogleInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "New action map",
-            "id": "7f8008fd-2329-42c7-8abf-9a5990ca0b1e",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "9a13dce3-9f7a-4293-8c42-63d0b838511d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "dbb79bd0-8841-45c2-9424-9ea5d9ffb31a",
-                    "path": "",
+                    "id": "54423c98-c95e-471e-8a3f-0053e80b839d",
+                    "path": "<OculusTouchController>{LeftHand}/primaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "ToogleInventory",
-            "id": "a77beb5d-f0cb-431e-afa7-084b07f3a542",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "77140f16-5b24-49a0-a930-c8b58aa9fa97",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "d0fe44c5-37c5-4e4d-9cf2-26035c653d06",
-                    "path": "*/{Cancel}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "action": "PrimaryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "378d6467-0003-46ab-acc7-7cec1f72a681",
-                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "id": "c3be9231-8a49-434b-80de-42374d57ef26",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "PrimaryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
