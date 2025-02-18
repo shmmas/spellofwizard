@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2943195
+      value: 0.223102
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2943195
+      value: 0.223102
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2943195
+      value: 0.223102
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.875
+      value: 50.42323
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.6903
+      value: 21.949171
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.755
+      value: -146.1832
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_Name
-      value: Heal
+      value: PotionHeal
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       propertyPath: m_TagString
@@ -77,10 +77,13 @@ PrefabInstance:
       addedObject: {fileID: 603044484288413074}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6413188900807429799}
+      addedObject: {fileID: 6843909536532476710}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6845900692368329413}
+      addedObject: {fileID: 2926782218904845820}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6808649595662673985}
   m_SourcePrefab: {fileID: 100100000, guid: d0d0ff8834606d94fa2514dcc26c1b2c, type: 3}
 --- !u!1 &8535169005770503053 stripped
 GameObject:
@@ -106,9 +109,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0014064, y: 2.665714, z: 1.9999992}
-  m_Center: {x: -0.000704348, y: 0.3328571, z: -0.00000035762784}
---- !u!54 &6413188900807429799
+  m_Size: {x: 1.7530092, y: 2.8608625, z: 1.8616686}
+  m_Center: {x: 0.1760628, y: 0.26837826, z: 0.06916434}
+--- !u!54 &6843909536532476710
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,7 +138,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6845900692368329413
+--- !u!114 &2926782218904845820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,19 +191,7 @@ MonoBehaviour:
       m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6413188900807429799}
-        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
-        m_MethodName: set_isKinematic
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -299,3 +290,17 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &-6808649595662673985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8535169005770503053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0185316dd4062504a82d26f7bc20a269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionType: 0
+  effectAmount: 25

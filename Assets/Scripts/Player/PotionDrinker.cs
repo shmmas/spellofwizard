@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR;
 using UnityEngine.InputSystem;
 
 public class PotionDrinker : MonoBehaviour
@@ -14,26 +15,71 @@ public class PotionDrinker : MonoBehaviour
     [Header("Input Settings")]
     [SerializeField] private InputActionProperty leftTriggerAction; // Input trigger tangan kiri
     [SerializeField] private InputActionProperty rightTriggerAction; // Input trigger tangan kanan
+    [SerializeField] private InputActionProperty rightGripAction; // Input grip tangan kanan
+
+    private GameObject heldPotion; // Potion yang sedang dipegang
 
     private void Start()
     {
         // Enable input actions
         leftTriggerAction.action.Enable();
         rightTriggerAction.action.Enable();
+        rightGripAction.action.Enable();
+
+        // Subscribe ke event ketika objek diambil atau dilepas
+        leftHandInteractor.selectEntered.AddListener(OnPotionPickedUp);
+        rightHandInteractor.selectEntered.AddListener(OnPotionPickedUp);
+
+        leftHandInteractor.selectExited.AddListener(OnPotionReleased);
+        rightHandInteractor.selectExited.AddListener(OnPotionReleased);
     }
 
     private void Update()
     {
-        // Cek input trigger tangan kiri
-        if (leftTriggerAction.action.ReadValue<float>() > 0.5f && leftHandInteractor.selectTarget != null)
+        // Cek input klik kiri mouse (M0)
+        if (Input.GetMouseButtonDown(0) )
         {
-            DrinkPotion(leftHandInteractor.selectTarget.gameObject);
+            DrinkPotionIfHeld();
         }
 
-        // Cek input trigger tangan kanan
-        if (rightTriggerAction.action.ReadValue<float>() > 0.5f && rightHandInteractor.selectTarget != null)
+        // Cek input trigger tangan kanan (Oculus)
+        if (rightTriggerAction.action.ReadValue<float>() > 0.5f)
         {
-            DrinkPotion(rightHandInteractor.selectTarget.gameObject);
+            DrinkPotionIfHeld();
+        }
+
+        // Cek input grip tangan kanan (Oculus)
+        if (rightGripAction.action.ReadValue<float>() > 0.5f)
+        {
+            DrinkPotionIfHeld();
+        }
+    }
+
+    private void OnPotionPickedUp(SelectEnterEventArgs args)
+    {
+        // Cek apakah objek yang diambil adalah potion
+        GameObject pickedObject = args.interactableObject.transform.gameObject;
+        if (pickedObject.CompareTag("Potion"))
+        {
+            Debug.Log("Potion diambil: " + pickedObject.name);
+            heldPotion = pickedObject; // Simpan potion yang dipegang
+        }
+    }
+
+    private void OnPotionReleased(SelectExitEventArgs args)
+    {
+        // Reset heldPotion saat potion dilepas
+        if (args.interactableObject.transform.gameObject == heldPotion)
+        {
+            heldPotion = null;
+        }
+    }
+
+    private void DrinkPotionIfHeld()
+    {
+        if (heldPotion != null)
+        {
+            DrinkPotion(heldPotion);
         }
     }
 
@@ -57,6 +103,8 @@ public class PotionDrinker : MonoBehaviour
             {
                 Debug.LogWarning("Jenis potion tidak dikenali: " + potion.name);
             }
+
+            heldPotion = null; // Reset heldPotion setelah diminum
         }
     }
 }

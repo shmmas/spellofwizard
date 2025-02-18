@@ -1,23 +1,26 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class HealthSystemVR : MonoBehaviour
 {
     [Header("Health Settings")]
     [SerializeField] private float maxHealth = 100f;
-    private float currentHealth;
+    public float currentHealth; // ✅ Ubah menjadi public agar bisa diakses dari skrip lain
 
     [Header("Shield Settings")]
     [SerializeField] private float maxShield = 50f;
-    private float currentShield;
+    public float currentShield; // ✅ Ubah menjadi public agar bisa diakses dari skrip lain
 
     [Header("UI References")]
-    [SerializeField] private Image healthFill; // Referensi ke UI Health Bar Fill
-    [SerializeField] private Image shieldFill; // Referensi ke UI Shield Bar Fill
+    [SerializeField] private Image healthFill; // UI Health Bar
+    [SerializeField] private Image shieldFill; // UI Shield Bar
 
     [Header("Color Gradients")]
-    [SerializeField] private Gradient healthGradient; // Gradient untuk health bar
-    [SerializeField] private Gradient shieldGradient; // Gradient untuk shield bar
+    [SerializeField] private Gradient healthGradient;
+    [SerializeField] private Gradient shieldGradient;
+
+    private InputDevice rightController; // Controller VR tangan kanan
 
     private void Start()
     {
@@ -25,40 +28,46 @@ public class HealthSystemVR : MonoBehaviour
         currentHealth = maxHealth;
         currentShield = maxShield;
 
+        // Cari controller kanan
+        rightController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+
         // Update UI
         UpdateUI();
     }
 
+    private void Update()
+    {
+        // Cek apakah tombol primary button ditekan untuk mengurangi health (Testing)
+        if (rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool isPressed) && isPressed)
+        {
+            TakeDamage(10f);
+            Debug.Log("🎮 [VR] Primary Button ditekan! Mengurangi 10 HP.");
+        }
+    }
+
     public void TakeDamage(float damage)
     {
-        // Kurangi shield terlebih dahulu
         if (currentShield > 0)
         {
             currentShield -= damage;
             if (currentShield < 0)
             {
-                // Jika shield habis, kurangi health dengan sisa damage
-                currentHealth += currentShield; // currentShield bernilai negatif
+                currentHealth += currentShield; // currentShield bisa bernilai negatif
                 currentShield = 0;
             }
         }
         else
         {
-            // Jika shield habis, kurangi health
             currentHealth -= damage;
         }
 
-        // Pastikan health dan shield tidak kurang dari 0
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         currentShield = Mathf.Clamp(currentShield, 0, maxShield);
 
-        // Update UI
         UpdateUI();
 
-        // Debug log untuk testing
-        Debug.Log($"Took {damage} damage. Health: {currentHealth}, Shield: {currentShield}");
+        Debug.Log($"🔥 Took {damage} damage! HP: {currentHealth}, Shield: {currentShield}");
 
-        // Cek jika health habis
         if (currentHealth <= 0)
         {
             Die();
@@ -68,41 +77,64 @@ public class HealthSystemVR : MonoBehaviour
     public void Heal(float amount)
     {
         currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Pastikan health tidak melebihi maxHealth
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateUI();
-        Debug.Log($"Healed {amount} points. Current Health: {currentHealth}");
+        Debug.Log($"❤️ Healed {amount} HP! Current HP: {currentHealth}");
     }
 
     public void AddShield(float amount)
     {
         currentShield += amount;
-        currentShield = Mathf.Clamp(currentShield, 0, maxShield); // Pastikan shield tidak melebihi maxShield
+        currentShield = Mathf.Clamp(currentShield, 0, maxShield);
         UpdateUI();
-        Debug.Log($"Added {amount} shield points. Current Shield: {currentShield}");
+        Debug.Log($"🛡️ Added {amount} Shield! Current Shield: {currentShield}");
+    }
+
+    public void DrinkPotion(string potionType)
+    {
+        switch (potionType)
+        {
+            case "HP":
+                Heal(30f);
+                Debug.Log("🍷 [Potion HP] Diminum! Health bertambah 30.");
+                break;
+
+            case "Shield":
+                AddShield(25f);
+                Debug.Log("🛡️ [Potion Shield] Diminum! Shield bertambah 25.");
+                break;
+
+            case "Poison":
+                TakeDamage(20f);
+                Debug.Log("☠️ [Potion Racun] Diminum! Health berkurang 20.");
+                break;
+
+            default:
+                Debug.Log("❌ Potion tidak dikenal.");
+                break;
+        }
     }
 
     private void UpdateUI()
     {
-        // Update health bar fill amount dan warna
         if (healthFill != null)
         {
             float healthPercentage = currentHealth / maxHealth;
             healthFill.fillAmount = healthPercentage;
-            healthFill.color = healthGradient.Evaluate(healthPercentage); // Atur warna berdasarkan gradient
+            healthFill.color = healthGradient.Evaluate(healthPercentage);
         }
 
-        // Update shield bar fill amount dan warna
         if (shieldFill != null)
         {
             float shieldPercentage = currentShield / maxShield;
             shieldFill.fillAmount = shieldPercentage;
-            shieldFill.color = shieldGradient.Evaluate(shieldPercentage); // Atur warna berdasarkan gradient
+            shieldFill.color = shieldGradient.Evaluate(shieldPercentage);
         }
     }
 
     private void Die()
     {
-        Debug.Log("Player has died.");
+        Debug.Log("💀 Player has died.");
         // Tambahkan logika kematian di sini (misalnya, restart level atau tampilkan layar game over)
     }
 }
