@@ -14,6 +14,7 @@ TagManager:
   - Grabbale
   - InventorySlot
   - SmellingFlower
+  - PlayerObj
   layers:
   - Default
   - TransparentFX
@@ -22,9 +23,9 @@ TagManager:
   - Water
   - UI
   - Grabbale
-  - 
-  - 
-  - 
+  - WhatIsGround
+  - WhatIsPlayer
+  - WhatIsEnemy
   - 
   - 
   - 
